@@ -13,7 +13,7 @@ This project consists of a Packer template and a Terraform template to deploy a 
 
 Create a Service Principal using the [instructions](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/guides/service_principal_client_secret).
 
-Set the following environment variables,using the AppID and Password from the Service Principal as the ARM_CLIENT_id AND ARM_CLIENT_SECRET respectively. The link above also contains details on how to retrieve the values needed for ARM_SUBSCRIPTION_ID and ARM_TENANT_ID.
+Set the following environment variables,using the AppID and Password from the Service Principal as the ARM_CLIENT_ID AND ARM_CLIENT_SECRET respectively. The link above also contains details on how to retrieve the values needed for ARM_SUBSCRIPTION_ID and ARM_TENANT_ID.
 
 >ARM_CLIENT_ID  
 >ARM_CLIENT_SECRET  
@@ -43,15 +43,15 @@ Execute the following to deploy the Terraform template:
 2. terraform plan
 3. terraform apply
 
-The 'apply' step will require confirmation by typing 'yes' at the prompt. This can be skipped by adding the -auto-approve parameter.
+The *apply* step will require confirmation by typing *yes* at the prompt. This can be skipped by adding the *-auto-approve* parameter.
 
 
 ### Output
 
 The end result of running both the Packer and Terraform template should be the following:
 
-1. A Linux VM image, based on Ubuntu 18.04 LTS, updated (*apt-get update,apt-get upgrade*) with Nginx installed and running with a default homepage ('Hello World'). This Image is visible as a Managed Image in the Azure subscription.
-2. A deployment of 2 virtual machines based on the image of the previous step, running in an Availability Set. These virtual machines have additional Managed Disks as datadisks.
+1. A Linux VM image, based on Ubuntu 18.04 LTS, updated (*apt-get update,apt-get upgrade*) with Nginx installed and running with a default homepage ('Hello World'). This Image is visible as a Managed Image resource in the Azure subscription.
+2. A deployment of 2 virtual machines based on the image of the previous step, running in an Availability Set. These virtual machines have additional Managed Disks added to them to be used as datadisks.
 3. An Azure Load Balancer, reachable through a Public IP and using the virtual machines as the backend. The Load Balancer is configured with both a load balancing rule and a HealthProbe.
 4. A virtual network containing a subnet, protected by a Network Security Group allowing Inbound Port 80, VNet-internal traffic but also has an explicit deny for traffic originating from the Internet.
 
